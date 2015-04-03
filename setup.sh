@@ -1,4 +1,4 @@
-BASEDIR=~/ls/sim/
+BASEDIR=$( cd $(dirname $0) ; pwd -P )/instance
 for tabletid in $(seq 1 3) 
 do 
   TABLETNAME="tablet$tabletid"

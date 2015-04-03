@@ -1,6 +1,5 @@
-BASEDIR=ls/sim/
+BASEDIR=$( cd $(dirname $0) ; pwd -P )/instance
 HOSTNAME=localhost
-HOMEDIR=/Users/$USER
 
 for tabletid1 in $(seq 1 3) 
 do 
@@ -12,10 +11,12 @@ do
     SOURCE_TABLETNAME="tablet$tabletid1"
     TARGET_TABLETNAME="tablet$tabletid2"
     # assuming hostname tablet$tabletid is in /etc/hosts
-    TABLETDIR=$HOMEDIR/$BASEDIR/$SOURCE_TABLETNAME
+    TABLETDIR=$BASEDIR/$SOURCE_TABLETNAME
     TABLETDATA=$TABLETDIR/data
     cd $TABLETDATA
-    git remote add $TARGET_TABLETNAME ssh://$HOSTNAME/$HOMEDIR/$BASEDIR/$TARGET_TABLETNAME/data
+    REMOTE="ssh://$HOSTNAME/$BASEDIR/$TARGET_TABLETNAME/data"
+    echo $REMOTE
+    git remote add $TARGET_TABLETNAME $REMOTE
   done
   git annex sync
 done
